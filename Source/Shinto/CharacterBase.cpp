@@ -18,9 +18,6 @@ ACharacterBase::ACharacterBase()
 	//PlayerEyeSpringArm = CreateDefaultSubobject<USpringArmComponent>("PlayerEyeSpringArm");
 	PlayerEye = CreateDefaultSubobject<UCameraComponent>("PlayerEye");
 	SkeletalMeshToHide = GetMesh();
-	SkeletalMeshToHide->SetActive(false);
-	SkeletalMeshToShow = CreateDefaultSubobject<USkeletalMeshComponent>("SkeletalMeshToShow");
-	SkeletalMeshToShow->SetupAttachment(PlayerEye);
 	PlayerEye->SetupAttachment(GetRootComponent());
 	PlayerEye->bUsePawnControlRotation = true;
 	bUseControllerRotationYaw = false;
@@ -35,6 +32,9 @@ ACharacterBase::ACharacterBase()
 // Called when the game starts or when spawned
 void ACharacterBase::BeginPlay()
 {
+	SkeletalMeshToHide->AttachToComponent(PlayerEye, FAttachmentTransformRules::KeepWorldTransform);
+
+
 	AbilitySystemComp->InitAbilityActorInfo(this, this);
 
 	InitializeAttributes();

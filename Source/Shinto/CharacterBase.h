@@ -34,8 +34,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		USkeletalMeshComponent* SkeletalMeshToHide;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		USkeletalMeshComponent* SkeletalMeshToShow;
+	
 
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class UShintoAbilitySystemComp* AbilitySystemComp;

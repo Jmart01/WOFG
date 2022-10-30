@@ -10,6 +10,6 @@ enum class EShintoAbilityInputID : uint8
 	None,
 	Confirm,
 	Cancel,
-	Melee,
+	Attack,
 	Heal
 };
