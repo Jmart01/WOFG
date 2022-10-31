@@ -17,6 +17,8 @@ class SHINTO_API AMyAIController : public AAIController
 	GENERATED_BODY()
 public:
 	AMyAIController();
+	UFUNCTION()
+		void ChangeHealth(float changeAmount);
 	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -38,6 +40,11 @@ protected:
 	UFUNCTION()
 		void PerceptionUpdated(AActor* Target, FAIStimulus Stimulus);
 
+	
+
+	UFUNCTION()
+		void SetDeath();
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI Perception")
 	float AISightRadius = 2500.f;
 	
@@ -45,6 +52,12 @@ protected:
 		float AILoseSightRadius = 2550.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI Perception")
 		float AISightAngle = 90.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		float CurrentHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		float MaxHealth = 100;
 
 	//float DistanceToPlayer;
 

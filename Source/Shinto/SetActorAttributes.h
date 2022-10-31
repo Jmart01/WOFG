@@ -30,6 +30,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
 		FGameplayAttributeData Health;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes") 
 		FGameplayAttributeData AttackPower;
+	ATTRIBUTE_ACCESSORS(USetActorAttributes, AttackPower)
 };

@@ -30,6 +30,8 @@ AMyAIController::AMyAIController()
 void AMyAIController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	CurrentHealth = MaxHealth;
 	if (PerceptionComp)
 	{
 		PerceptionComp->OnTargetPerceptionUpdated.AddDynamic(this, &AMyAIController::PerceptionUpdated);
@@ -96,4 +98,22 @@ void AMyAIController::PerceptionUpdated(AActor* Target, FAIStimulus Stimulus)
 	{
 		GetBlackboardComponent()->ClearValue(FName("Target"));
 	}
+}
+
+void AMyAIController::ChangeHealth(float changeAmount)
+{
+	if (CurrentHealth > 0)
+	{
+		CurrentHealth -= changeAmount;
+	}
+	else if (CurrentHealth <= 0)
+	{
+		SetDeath();
+	}
+}
+
+void AMyAIController::SetDeath()
+{
+	//Should Set the animation to the death state
+	UE_LOG(LogTemp, Warning, TEXT("Is dead"));
 }

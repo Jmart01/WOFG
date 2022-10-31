@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/Actor.h"
-
+#include "GameplayEffect.h"
 #include "Projectile.generated.h"
 
 UCLASS()
@@ -26,8 +26,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameplayAbility", Meta = (ExposeOnSpawn = "true"))
 		float LifeDuration;
 
-	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameplayAbility", Meta = (ExposeOnSpawn = "true"))
-		//FGameplayEffectSpecHandle SpecToApplyToTarget;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameplayAbility", Meta = (ExposeOnSpawn = "true"))
+		FGameplayEffectSpecHandle SpecToApplyToTarget;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -35,5 +35,6 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
 };
