@@ -64,15 +64,10 @@ void AMyAIController::PerceptionUpdated(AActor* Target, FAIStimulus Stimulus)
 		UAISenseConfig* StimulusConfig = PerceptionComp->GetSenseConfig(Stimulus.Type);
 		if (!ExistingTarget || StimulusConfig->GetClass() == UAISenseConfig_Sight::StaticClass())
 		{
-			UE_LOG(LogTemp, Warning, TEXT("Detected Something"));
 			if (Target == Cast<ACharacterBase, AActor>(Target))
 			{
-				UE_LOG(LogTemp, Warning, TEXT("Tareget is the player"));
+				
 				GetBlackboardComponent()->SetValueAsObject(FName("Target"), Target);
-			}
-			else
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Not detecting player"));
 			}
 		}
 		else
@@ -81,14 +76,8 @@ void AMyAIController::PerceptionUpdated(AActor* Target, FAIStimulus Stimulus)
 			PerceptionComp->GetCurrentlyPerceivedActors(UAISenseConfig_Sight::StaticClass(), ActorInSight);
 			for (int i = 0; i < ActorInSight.Num(); i++)
 			{
-				/*DistanceToPlayer = GetPawn()->GetDistanceTo(ActorInSight[i]);
-				if (DistanceToPlayer > AILoseSightRadius)
-				{
-					
-				}*/
 				if (ActorInSight.Num() == 0)
 				{
-					UE_LOG(LogTemp, Warning, TEXT("Clearing Target value"));
 					GetBlackboardComponent()->ClearValue(FName("Target"));
 				}
 			}
@@ -102,6 +91,7 @@ void AMyAIController::PerceptionUpdated(AActor* Target, FAIStimulus Stimulus)
 
 void AMyAIController::ChangeHealth(float changeAmount)
 {
+	UE_LOG(LogTemp, Warning, TEXT("Gets to ChangeHealth"));
 	if (CurrentHealth > 0)
 	{
 		CurrentHealth -= changeAmount;
