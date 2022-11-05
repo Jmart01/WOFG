@@ -12,7 +12,7 @@ AProjectile::AProjectile()
 	PrimaryActorTick.bCanEverTick = true;
 	SphereComp = CreateDefaultSubobject<USphereComponent>("SphereComp");
 	SetRootComponent(SphereComp);
-	SphereComp->SetSphereRadius(132.f);
+	SphereComp->SetSphereRadius(32.f);
 	SphereComp->SetCollisionResponseToAllChannels(ECR_Ignore);
 	SphereComp->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	LifeDuration = 3.f;
@@ -38,23 +38,27 @@ void AProjectile::NotifyActorBeginOverlap(AActor* OtherActor)
 	{
 		return;
 	}
-	if (SpecToApplyToTarget.IsValid())
-	{
-		
-		
-	}
 	UE_LOG(LogTemp, Warning, TEXT("Hit Something"));
-	AMyAIController* otherActorAsAIController = Cast<AMyAIController>(OtherActor);
+	/*
 	if (otherActorAsAIController)
 	{
 		USetActorAttributes* Attributes = Cast<USetActorAttributes>(GetOwner()->GetComponentByClass(USetActorAttributes::StaticClass()));
 		otherActorAsAIController->ChangeHealth(Attributes->GetAttackPower());
 		UE_LOG(LogTemp, Warning, TEXT("Should damage the snail"));
-	}
+	}*/
 	ACharacter* AI = Cast<ACharacter>(OtherActor);
 	if (AI)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("OtherActor is AI"));
+		FString ControllerName = AI->GetController()->GetName();
+		UE_LOG(LogTemp, Warning, TEXT("%s"), *ControllerName);
+		AMyAIController* otherActorAsAIController = Cast<AMyAIController>(AI->GetController());
+		if (otherActorAsAIController == AI->GetController())
+		{
+			USetActorAttributes* Attributes = Cast<USetActorAttributes>(GetOwner()->GetComponentByClass(USetActorAttributes::StaticClass()));
+			UE_LOG(LogTemp, Warning, TEXT("Should damage the snail"));
+			otherActorAsAIController->ChangeHealth(20);
+		}
 	}
 }
 
