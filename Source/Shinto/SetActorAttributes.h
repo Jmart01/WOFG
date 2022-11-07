@@ -28,9 +28,14 @@ public:
 	USetActorAttributes();
 
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
-		FGameplayAttributeData Health;
+	FGameplayAttributeData Health;
+	ATTRIBUTE_ACCESSORS(USetActorAttributes, Health)
+
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData maxHealth;
+	ATTRIBUTE_ACCESSORS(USetActorAttributes, maxHealth)
 
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes") 
-		FGameplayAttributeData AttackPower;
+	FGameplayAttributeData AttackPower;
 	ATTRIBUTE_ACCESSORS(USetActorAttributes, AttackPower)
 };

@@ -13,7 +13,8 @@ class SHINTO_API ACharacterBase : public ACharacter, public IAbilitySystemInterf
 public:
 	// Sets default values for this character's properties
 	ACharacterBase();
-
+	UFUNCTION(BlueprintImplementableEvent, Category = "GAS")
+	void BP_HealthUpdated(float newValue, float maxVaue);
 
 protected:
 	// Called when the game starts or when spawned
@@ -65,5 +66,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-
+private:
+	void HealthUpdated(const FOnAttributeChangeData& attributeData);
 };

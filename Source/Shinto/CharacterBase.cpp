@@ -37,6 +37,9 @@ void ACharacterBase::BeginPlay()
 
 	AbilitySystemComp->InitAbilityActorInfo(this, this);
 
+	//bind to health change, whenever health is changed, healthUpdated is called
+	AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(Attributes->GetHealthAttribute()).AddUObject(this, &ACharacterBase::HealthUpdated);
+
 	InitializeAttributes();
 	GiveAbilities();
 	if (AbilitySystemComp && InputComponent)
@@ -54,6 +57,11 @@ void ACharacterBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ACharacterBase::HealthUpdated(const FOnAttributeChangeData& attributeData)
+{
+	BP_HealthUpdated(attributeData.NewValue, Attributes->GetmaxHealth());
 }
 
 // Called to bind functionality to input
