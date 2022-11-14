@@ -34,12 +34,9 @@ void ACharacterBase::BeginPlay()
 {
 	SkeletalMeshToHide->AttachToComponent(PlayerEye, FAttachmentTransformRules::KeepWorldTransform);
 
-
 	AbilitySystemComp->InitAbilityActorInfo(this, this);
 
-	//bind to health change, whenever health is changed, healthUpdated is called
-	AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(Attributes->GetHealthAttribute()).AddUObject(this, &ACharacterBase::HealthUpdated);
-
+	
 	InitializeAttributes();
 	GiveAbilities();
 	if (AbilitySystemComp && InputComponent)
@@ -48,6 +45,10 @@ void ACharacterBase::BeginPlay()
 			static_cast<int32>(EShintoAbilityInputID::Confirm), static_cast<int32>(EShintoAbilityInputID::Cancel));
 		AbilitySystemComp->BindAbilityActivationToInputComponent(InputComponent, Binds);
 	}
+
+	//bind to health change, whenever health is changed, healthUpdated is called
+	AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(Attributes->GetHealthAttribute()).AddUObject(this, &ACharacterBase::HealthUpdated);
+
 	Super::BeginPlay();
 	
 }

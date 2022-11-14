@@ -51,6 +51,7 @@ protected:
 	void Turn(float amount);
 	void LookUp(float amount);
 
+	//functions that give the player attributes and abilities
 	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	virtual void InitializeAttributes();
