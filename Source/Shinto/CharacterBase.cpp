@@ -17,7 +17,7 @@ ACharacterBase::ACharacterBase()
 	
 	//PlayerEyeSpringArm = CreateDefaultSubobject<USpringArmComponent>("PlayerEyeSpringArm");
 	PlayerEye = CreateDefaultSubobject<UCameraComponent>("PlayerEye");
-	SkeletalMeshToHide = GetMesh();
+
 	PlayerEye->SetupAttachment(GetRootComponent());
 	PlayerEye->bUsePawnControlRotation = true;
 	bUseControllerRotationYaw = false;
@@ -32,10 +32,11 @@ ACharacterBase::ACharacterBase()
 // Called when the game starts or when spawned
 void ACharacterBase::BeginPlay()
 {
-	SkeletalMeshToHide->AttachToComponent(PlayerEye, FAttachmentTransformRules::KeepWorldTransform);
+	Super::BeginPlay();
+
+	GetMesh()->AttachToComponent(PlayerEye, FAttachmentTransformRules::KeepWorldTransform);
 
 	AbilitySystemComp->InitAbilityActorInfo(this, this);
-
 	
 	InitializeAttributes();
 	GiveAbilities();
@@ -48,9 +49,6 @@ void ACharacterBase::BeginPlay()
 
 	//bind to health change, whenever health is changed, healthUpdated is called
 	AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(Attributes->GetHealthAttribute()).AddUObject(this, &ACharacterBase::HealthUpdated);
-
-	Super::BeginPlay();
-	
 }
 
 // Called every frame

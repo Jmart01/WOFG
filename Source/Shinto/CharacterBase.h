@@ -32,16 +32,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UCameraComponent* PlayerEye;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		USkeletalMeshComponent* SkeletalMeshToHide;
-
-	
-
 	UPROPERTY(VisibleAnywhere, BluePrintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-		class UShintoAbilitySystemComp* AbilitySystemComp;
+	class UShintoAbilitySystemComp* AbilitySystemComp;
 
 	UPROPERTY()
-		class USetActorAttributes* Attributes;
+	class USetActorAttributes* Attributes;
 
 
 	//functions that deal with movement
