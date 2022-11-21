@@ -58,35 +58,51 @@ void AMyAIController::Tick(float DeltaTime)
 
 void AMyAIController::PerceptionUpdated(AActor* Target, FAIStimulus Stimulus)
 {
+	ACharacterBase* TargetAsCharacterBase = Cast<ACharacterBase>(Target);
+	if (!TargetAsCharacterBase)
+		return;
+
 	if (Stimulus.WasSuccessfullySensed())
 	{
-		auto ExistingTarget = GetBlackboardComponent()->GetValueAsObject(FName("Target"));
-		UAISenseConfig* StimulusConfig = PerceptionComp->GetSenseConfig(Stimulus.Type);
-		if (!ExistingTarget || StimulusConfig->GetClass() == UAISenseConfig_Sight::StaticClass())
-		{
-			if (Target == Cast<ACharacterBase, AActor>(Target))
-			{
-				
-				GetBlackboardComponent()->SetValueAsObject(FName("Target"), Target);
-			}
-		}
-		else
-		{
-			TArray<AActor*> ActorInSight;
-			PerceptionComp->GetCurrentlyPerceivedActors(UAISenseConfig_Sight::StaticClass(), ActorInSight);
-			for (int i = 0; i < ActorInSight.Num(); i++)
-			{
-				if (ActorInSight.Num() == 0)
-				{
-					GetBlackboardComponent()->ClearValue(FName("Target"));
-				}
-			}
-		}
+		GetBlackboardComponent()->SetValueAsObject(FName("Target"), Target);
 	}
 	else
 	{
-		GetBlackboardComponent()->ClearValue(FName("Target"));
+		auto actorInfo = PerceptionComp->GetActorInfo(*Target);
+		if (!actorInfo->HasAnyCurrentStimulus())
+		{
+			GetBlackboardComponent()->ClearValue(FName("Target"));
+		}
 	}
+	//if (Stimulus.WasSuccessfullySensed())
+	//{
+	//	auto ExistingTarget = GetBlackboardComponent()->GetValueAsObject(FName("Target"));
+	//	UAISenseConfig* StimulusConfig = PerceptionComp->GetSenseConfig(Stimulus.Type);
+	//	if (!ExistingTarget || StimulusConfig->GetClass() == UAISenseConfig_Sight::StaticClass())
+	//	{
+	//		if (Target == Cast<ACharacterBase, AActor>(Target))
+	//		{
+	//			
+	//			GetBlackboardComponent()->SetValueAsObject(FName("Target"), Target);
+	//		}
+	//	}
+	//	else
+	//	{
+	//		TArray<AActor*> ActorInSight;
+	//		PerceptionComp->GetCurrentlyPerceivedActors(UAISenseConfig_Sight::StaticClass(), ActorInSight);
+	//		for (int i = 0; i < ActorInSight.Num(); i++)
+	//		{
+	//			if (ActorInSight.Num() == 0)
+	//			{
+	//				GetBlackboardComponent()->ClearValue(FName("Target"));
+	//			}
+	//		}
+	//	}
+	//}
+	//else
+	//{
+	//	GetBlackboardComponent()->ClearValue(FName("Target"));
+	//}
 }
 
 void AMyAIController::ChangeHealth(float changeAmount)
