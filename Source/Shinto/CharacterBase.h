@@ -16,6 +16,9 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "GAS")
 	void BP_HealthUpdated(float newValue, float maxVaue);
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "GAS")
+	void BP_Death();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

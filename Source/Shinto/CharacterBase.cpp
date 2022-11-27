@@ -61,6 +61,11 @@ void ACharacterBase::Tick(float DeltaTime)
 void ACharacterBase::HealthUpdated(const FOnAttributeChangeData& attributeData)
 {
 	BP_HealthUpdated(attributeData.NewValue, Attributes->GetmaxHealth());
+	if (attributeData.NewValue, Attributes->GetHealth() == 0)
+	{
+		UE_LOG(LogTemp,Warning, TEXT("Should call on the death functionality"))
+		//BP_Death();
+	}
 }
 
 // Called to bind functionality to input
