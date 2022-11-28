@@ -13,7 +13,6 @@ AShintoGameModeBase::AShintoGameModeBase()
 	}
 	else
 	{
-		//try to find the blueprint of the player
-		//PlayerPawnBPClass = 
+
 	}
 }
