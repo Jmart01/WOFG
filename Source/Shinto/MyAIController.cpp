@@ -112,10 +112,23 @@ void AMyAIController::ChangeHealth(float changeAmount)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Changes Health Of the Snail"));
 		CurrentHealth -= changeAmount;
+		CheckHealth(CurrentHealth);
 	}
 	else if (CurrentHealth <= 0)
 	{
 		SetDeath();
+	}
+}
+
+void AMyAIController::CheckHealth(float currentHealth)
+{
+	if (currentHealth <= 0)
+	{
+		SetDeath();
+	}
+	else
+	{
+		return;
 	}
 }
 

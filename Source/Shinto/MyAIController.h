@@ -18,7 +18,9 @@ class SHINTO_API AMyAIController : public AAIController
 public:
 	AMyAIController();
 	UFUNCTION()
-		void ChangeHealth(float changeAmount);
+	void ChangeHealth(float changeAmount);
+	UFUNCTION()
+	void CheckHealth(float currentHealth);
 	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
