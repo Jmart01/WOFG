@@ -110,13 +110,14 @@ void AMyAIController::ChangeHealth(float changeAmount)
 	UE_LOG(LogTemp, Warning, TEXT("Gets to ChangeHealth"));
 	if (CurrentHealth > 0)
 	{
+		CheckHealth(CurrentHealth);
 		UE_LOG(LogTemp, Warning, TEXT("Changes Health Of the Snail"));
 		CurrentHealth -= changeAmount;
-		CheckHealth(CurrentHealth);
+		
 	}
 	else if (CurrentHealth <= 0)
 	{
-		SetDeath();
+		SetDeathProcess();
 	}
 }
 
@@ -124,7 +125,7 @@ void AMyAIController::CheckHealth(float currentHealth)
 {
 	if (currentHealth <= 0)
 	{
-		SetDeath();
+		SetDeathProcess();
 	}
 	else
 	{
@@ -132,10 +133,11 @@ void AMyAIController::CheckHealth(float currentHealth)
 	}
 }
 
-void AMyAIController::SetDeath()
+/*void AMyAIController::SetDeath()
 {
 	//Should Set the animation to the death state
 	UE_LOG(LogTemp, Warning, TEXT("Is dead"));
+	//GetCharacter()->GetMesh()->GetAnimInstance()->Montage_Play(UAnimMontage *)
 	GetPawn()->Destroy();
 	Destroy();
-}
+}*/
