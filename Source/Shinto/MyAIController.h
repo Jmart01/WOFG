@@ -44,8 +44,8 @@ protected:
 
 	
 
-	UFUNCTION()
-		void SetDeath();
+	//UFUNCTION()
+		//void SetDeath();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI Perception")
 	float AISightRadius = 2500.f;
@@ -61,6 +61,8 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		float MaxHealth = 100;
 
+	UFUNCTION(BlueprintImplementableEvent)
+		void SetDeathProcess();
 	//float DistanceToPlayer;
 
 };
