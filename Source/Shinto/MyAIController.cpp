@@ -108,9 +108,10 @@ void AMyAIController::PerceptionUpdated(AActor* Target, FAIStimulus Stimulus)
 void AMyAIController::ChangeHealth(float changeAmount)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Gets to ChangeHealth"));
+	CheckHealth(CurrentHealth);
 	if (CurrentHealth > 0)
 	{
-		CheckHealth(CurrentHealth);
+		
 		UE_LOG(LogTemp, Warning, TEXT("Changes Health Of the Snail"));
 		CurrentHealth -= changeAmount;
 		
@@ -129,6 +130,7 @@ void AMyAIController::CheckHealth(float currentHealth)
 	}
 	else
 	{
+		Hit();
 		return;
 	}
 }

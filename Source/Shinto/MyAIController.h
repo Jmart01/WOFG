@@ -63,6 +63,8 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent)
 		void SetDeathProcess();
+	UFUNCTION(BlueprintImplementableEvent)
+		void Hit();
 	//float DistanceToPlayer;
 
 };
