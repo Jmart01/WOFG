@@ -135,6 +135,11 @@ void AMyAIController::CheckHealth(float currentHealth)
 	}
 }
 
+bool AMyAIController::GetHasShield()
+{
+	return HasShield;
+}
+
 /*void AMyAIController::SetDeath()
 {
 	//Should Set the animation to the death state

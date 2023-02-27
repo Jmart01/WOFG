@@ -18,6 +18,7 @@ public:
 	AProjectile();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collision")
 		USphereComponent* SphereComp;
+
 	//leave room for a niagara system
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameplayAbility", Meta = (ExposeOnSpawn = "true"))
@@ -36,5 +37,4 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
-
 };
