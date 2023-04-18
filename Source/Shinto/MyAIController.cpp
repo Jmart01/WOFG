@@ -108,15 +108,17 @@ void AMyAIController::PerceptionUpdated(AActor* Target, FAIStimulus Stimulus)
 void AMyAIController::ChangeHealth(float changeAmount)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Gets to ChangeHealth"));
+	CheckHealth(CurrentHealth);
 	if (CurrentHealth > 0)
 	{
+		
 		UE_LOG(LogTemp, Warning, TEXT("Changes Health Of the Snail"));
 		CurrentHealth -= changeAmount;
 		CheckHealth(CurrentHealth);
 	}
 	else if (CurrentHealth <= 0)
 	{
-		SetDeath();
+		SetDeathProcess();
 	}
 }
 
@@ -124,18 +126,25 @@ void AMyAIController::CheckHealth(float currentHealth)
 {
 	if (currentHealth <= 0)
 	{
-		SetDeath();
+		SetDeathProcess();
 	}
 	else
 	{
+		Hit();
 		return;
 	}
 }
 
-void AMyAIController::SetDeath()
+bool AMyAIController::GetHasShield()
+{
+	return HasShield;
+}
+
+/*void AMyAIController::SetDeath()
 {
 	//Should Set the animation to the death state
 	UE_LOG(LogTemp, Warning, TEXT("Is dead"));
+	//GetCharacter()->GetMesh()->GetAnimInstance()->Montage_Play(UAnimMontage *)
 	GetPawn()->Destroy();
 	Destroy();
-}
+}*/

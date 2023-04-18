@@ -3,6 +3,7 @@
 
 #include "Projectile.h"
 #include "MyAIController.h"
+#include "Components/CapsuleComponent.h"
 #include "SetActorAttributes.h"
 
 // Sets default values
@@ -15,6 +16,7 @@ AProjectile::AProjectile()
 	SphereComp->SetSphereRadius(32.f);
 	SphereComp->SetCollisionResponseToAllChannels(ECR_Ignore);
 	SphereComp->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
+	
 	LifeDuration = 3.f;
 }
 
@@ -34,6 +36,7 @@ void AProjectile::Tick(float DeltaTime)
 
 void AProjectile::NotifyActorBeginOverlap(AActor* OtherActor)
 {
+	
 	if (OtherActor == GetOwner())
 	{
 		return;
@@ -53,7 +56,7 @@ void AProjectile::NotifyActorBeginOverlap(AActor* OtherActor)
 		FString ControllerName = AI->GetController()->GetName();
 		UE_LOG(LogTemp, Warning, TEXT("%s"), *ControllerName);
 		AMyAIController* otherActorAsAIController = Cast<AMyAIController>(AI->GetController());
-		if (otherActorAsAIController == AI->GetController())
+		if (otherActorAsAIController == AI->GetController() && otherActorAsAIController->GetHasShield() == false)
 		{
 			USetActorAttributes* Attributes = Cast<USetActorAttributes>(GetOwner()->GetComponentByClass(USetActorAttributes::StaticClass()));
 			UE_LOG(LogTemp, Warning, TEXT("Should damage the snail"));

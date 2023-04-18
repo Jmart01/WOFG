@@ -11,5 +11,6 @@ enum class EShintoAbilityInputID : uint8
 	Confirm,
 	Cancel,
 	Attack,
-	Heal
+	Heal,
+	NavGuide
 };

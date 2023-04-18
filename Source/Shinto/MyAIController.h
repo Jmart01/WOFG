@@ -21,6 +21,8 @@ public:
 	void ChangeHealth(float changeAmount);
 	UFUNCTION()
 	void CheckHealth(float currentHealth);
+	UFUNCTION()
+		bool GetHasShield();
 	
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -44,8 +46,8 @@ protected:
 
 	
 
-	UFUNCTION()
-		void SetDeath();
+	//UFUNCTION()
+		//void SetDeath();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI Perception")
 	float AISightRadius = 2500.f;
@@ -60,7 +62,14 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		float MaxHealth = 100;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool HasShield = true;
 
+	UFUNCTION(BlueprintImplementableEvent)
+		void SetDeathProcess();
+	UFUNCTION(BlueprintImplementableEvent)
+		void Hit();
 	//float DistanceToPlayer;
+
 
 };
